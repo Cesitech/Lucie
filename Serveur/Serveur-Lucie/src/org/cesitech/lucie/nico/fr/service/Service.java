@@ -21,7 +21,6 @@ public class Service extends Thread{
 	public Service(Socket accept, LaunchServer launchServer) {
 		this.socketService = accept;
 		ID = new UID();
-		System.out.println(ID);
 		this.launchServer = launchServer;
 	}
 
@@ -43,18 +42,17 @@ public class Service extends Thread{
 				int idChar = -1;
 				while(idChar < 0 && isRunning){
 					idChar = in.read();
-					System.out.print((char)idChar);
+					code += (char)idChar;
 					if(idChar >= 0){
 						if(!message)milliseconde = System.nanoTime();
 						message = true;
 					}
-					if(idChar == -1 && message){
+					if(code.contains(";")){
 						packet(code, milliseconde);
 						message = false;
 						code = "";
 					}
 				}
-				code += (char)idChar;
 			}catch(Exception ex){
 				ex.printStackTrace();
 				isRunning = false;
@@ -63,9 +61,11 @@ public class Service extends Thread{
 	}
 
 	public void packet(String code, long milliseconde) {
+		code = code.replace(";", "");
 		System.out.println(code);
 		System.out.println("Temps de réponse : "+(System.nanoTime()-milliseconde)/1000000.0+" ms");
 		if(code.equals("getCoord()")){
+			System.out.println("=>t");
 			send("Bonjour");
 			System.out.println("=>t");
 		}
