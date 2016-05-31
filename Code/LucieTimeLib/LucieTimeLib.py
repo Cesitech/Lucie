@@ -24,6 +24,8 @@ Librairie des éléments temporels du robot "Lucie". Permet de connaitre l'heure
 
 import datetime
 import ConfigParser
+import urllib2
+
 
 mois  = ["Janvier","Février","Mars","Avril","Mai","Juin","Juillet","Août","Septembre","Octobre","Novembre","Décembre"]
 jours = ["Lundi","Mardi","Mercredi","Jeudi","Vendredi","Samedi","Dimanche"]
@@ -106,6 +108,23 @@ def date_and_time_natural_language():
 def day_natural_language():
     return "Nous sommes " + jours[datetime.datetime.today().weekday()]
 
+def get_from_network():
+    """
+    http://just-the-time.appspot.com renvoie une string sous la forme : 2016-05-31 12:45:05
+    Attention, l'heure renvoyée est en GMT-1 !!
+    """
+    response = urllib2.urlopen('http://just-the-time.appspot.com')
+    string = response.read()
+    string = string.split(" ") # Là ça donne une liste : [date,time]
+    time = string[1].split(":")
+    h=time[0]
+    m=time[1]
+    s=time[2]
+    d = 0
+    mo = 0
+    y = 0
+    return [d,mo,y,h,m,s]
+
 def test_lib():
     """
     Tester la librairie.
@@ -144,16 +163,16 @@ def test_lib():
     
     print("\n")
 
-    
     print("chargement config depuis le fichier 'config'...")
     config = Config()
     config.load("config")
     print("on est à GMT+" + str(config.gmtdiff))
+    
+    print("\n")
 
-def get_from_network():
-    """
-    http://just-the-time.appspot.com renvoie une string sous la forme : 2016-05-31 12:45:05 
-    """
+    print("Lecture de l'heure sur le réseau...")
+    get_from_network()
+    print("L'heure récupéré sur le réseau est " + str(config.gmtdiff))
 
 
 ###  T E S T  ###
