@@ -31,7 +31,7 @@ jours = ["Lundi","Mardi","Mercredi","Jeudi","Vendredi","Samedi","Dimanche"]
 
 # Classes
 
-class config():
+class Config():
     """
     Juste une classe pour stocker les variables de config...
     """
@@ -141,6 +141,14 @@ def test_lib():
 
     print "\n\nlecture chrono : "
     print(monChrono.read())
+    
+    print("\n")
+
+    
+    print("chargement config depuis le fichier 'config'...")
+    config = Config()
+    config.load("config")
+    print("on est à GMT+" + str(config.gmtdiff))
 
 def get_from_network():
     """
