@@ -12,10 +12,10 @@ Librairie des éléments temporels du robot "Lucie". Permet de connaitre l'heure
 
 
 !!!!!!!!!! ATTENTION !!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-!!                                              !! --> D'ailleurs il faudrait écrire une fonction qui
-!! L'heure de référence est celle du système!   !!     mette à l'heure le système dans ce fichier, si
-!! Il faut donc que le système soit à l'heure!  !!     quelqu'un s'en sent.. Moi je ne connais pas les API d'horloge réseau.
-!! ça éviterait de raconter n'importe quoi...   !!                    -- Guillaume
+!!                                              !! -
+!! L'heure de référence est celle du système!   !! 
+!! Il faut donc que le système soit à l'heure!  !!  
+!! ça éviterait de raconter n'importe quoi...   !!
 !!                               ;)             !!
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
@@ -23,11 +23,30 @@ Librairie des éléments temporels du robot "Lucie". Permet de connaitre l'heure
 """
 
 import datetime
+import ConfigParser
 
 mois  = ["Janvier","Février","Mars","Avril","Mai","Juin","Juillet","Août","Septembre","Octobre","Novembre","Décembre"]
 jours = ["Lundi","Mardi","Mercredi","Jeudi","Vendredi","Samedi","Dimanche"]
 
+
 # Classes
+
+class config():
+    """
+    Juste une classe pour stocker les variables de config...
+    """
+    def __init__(self):
+        pass
+    
+    def load(self, file):
+        """
+        Charger la config depuis un fichier config
+        """
+        configParser = ConfigParser.RawConfigParser()   
+        configParser.read(file)
+        self.gmtdiff = configParser.get('jetlag', 'gmtdiff')
+    
+
 class Timer():
     """
     TIMER
@@ -122,6 +141,11 @@ def test_lib():
 
     print "\n\nlecture chrono : "
     print(monChrono.read())
+
+def get_from_network():
+    """
+    http://just-the-time.appspot.com renvoie une string sous la forme : 2016-05-31 12:45:05 
+    """
 
 
 ###  T E S T  ###
