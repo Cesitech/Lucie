@@ -111,7 +111,7 @@ def day_natural_language():
 def get_from_network():
     """
     http://just-the-time.appspot.com renvoie une string sous la forme : 2016-05-31 12:45:05
-    Attention, l'heure renvoyée est en GMT-1 !!
+    Attention, l'heure renvoyée est calée sur GMT !
     """
     response = urllib2.urlopen('http://just-the-time.appspot.com')
     string = response.read()
@@ -120,6 +120,8 @@ def get_from_network():
     h=time[0]
     m=time[1]
     s=time[2]
+    
+    
     d = 0
     mo = 0
     y = 0
