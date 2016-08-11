@@ -10,14 +10,11 @@ Librairie des éléments temporels du robot "Lucie". Permet de connaitre l'heure
 
 === STICKYNOTES =====================
 
+#toDo :
 
-!!!!!!!!!! ATTENTION !!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-!!                                              !! -
-!! L'heure de référence est celle du système!   !! 
-!! Il faut donc que le système soit à l'heure!  !!  
-!! ça éviterait de raconter n'importe quoi...   !!
-!!                               ;)             !!
-!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+[OK] Récupérer l'heure sur le réseau
+[+] Mettre l'heure du système à jour
+[+] gérer les heures d'hiver / heures d'été
 
 
 """
