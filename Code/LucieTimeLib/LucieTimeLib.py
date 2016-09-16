@@ -110,28 +110,25 @@ def get_from_network():
     http://just-the-time.appspot.com renvoie une string sous la forme : 2016-05-31 12:45:05
     Attention, l'heure renvoyée est calée sur GMT !
     """
-    err = 0
     try:
         response = urllib2.urlopen('http://just-the-time.appspot.com')
         
     except urllib2.URLError:
         # On n'a pas internet !! c'est la merde! 
         print("Impossible de se connecter au serveur horaire, l'heure exacte n'a pas été récupérée.")
-        err = 1
         return 0
         
-    if err==0 : 
-        string = response.read()
-        string = string.split(" ") # Là ça donne une liste : [date,time]
-        time = string[1].split(":")
-        h=time[0]
-        m=time[1]
-        s=time[2]
-    
-        d = 0
-        mo = 0
-        y = 0
-        return [d,mo,y,h,m,s]
+    string = response.read()
+    string = string.split(" ") # Là ça donne une liste : [date,time]
+    time = string[1].split(":")
+    h=time[0]
+    m=time[1]
+    s=time[2]
+
+    d = 0
+    mo = 0
+    y = 0
+    return [d,mo,y,h,m,s]
 
 def test_lib():
     """
