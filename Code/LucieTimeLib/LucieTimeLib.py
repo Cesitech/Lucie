@@ -58,12 +58,16 @@ class Timer():
     monChrono.start()
     ...
     monChrono.time() -> temps en secondes depuis start() (int)
+    
+    En théorie, les chronos sont garbage-collectés. Du coup pas de methode pour le supprimer. 
     """
     def __init__(self):
+        print("[+] New chrono instance created.")
         pass
     
     def start(self):
         # Relever le temps dans une variable d'heure initiale
+        print("[+] Starting chrono...")
         self.startTime = datetime.datetime.now()
     
     def read(self):
@@ -111,7 +115,7 @@ def get_from_network():
     Attention, l'heure renvoyée est calée sur GMT !
     """
     try:
-        response = urllib2.urlopen('http://just-the-time.appspot.com')
+        response = urllib2.urlopen('http://just-the-time.appspot.com') # Sympa comme webapp ^^
         
     except urllib2.URLError:
         # On n'a pas internet !! c'est la merde! 
@@ -136,48 +140,48 @@ def test_lib():
     Personnaliser la fonction pour tester des éléments en particuliers.
     """
     
-    print "création d'un chrono & démarrage\n\n"
+    print "[+] création d'un chrono & démarrage\n\n"
     monChrono = Timer()
     monChrono.start()
     
-    print "time_natural_language()"
+    print "[f] time_natural_language()"
     print time_natural_language()
     
     print("\n")
     
-    print "date_and_time_natural_language()"
+    print "[f] date_and_time_natural_language()"
     print date_and_time_natural_language()
     
     print("\n")
     
-    print "time_natural_language_short()"
+    print "[f] time_natural_language_short()"
     print time_natural_language_short()
     
     print("\n")
     
-    print "date_natural_language()"
+    print "[f] date_natural_language()"
     print date_natural_language()
     
     print("\n")
     
-    print "day_natural_language()"
+    print "[f] day_natural_language()"
     print day_natural_language()
 
-    print "\n\nlecture chrono : "
+    print "\n\n[+] lecture chrono : "
     print(monChrono.read())
     
     print("\n")
 
-    print("chargement config depuis le fichier 'config'...")
+    print("[+] chargement config depuis le fichier 'config'...")
     config = Config()
     config.load("config")
     print("on est à GMT+" + str(config.gmtdiff))
     
     print("\n")
 
-    print("Lecture de l'heure sur le réseau...")
+    print("[+] Lecture de l'heure sur le réseau...")
     get_from_network()
-    print("L'heure récupéré sur le réseau est " + str(config.gmtdiff)) # HUM!! ça c'est de la merde pure !!
+    print("[i] L'heure récupéré sur le réseau est " + str(config.gmtdiff)) # HUM!! ça c'est de la merde pure !!
 
 
 ###  T E S T  ###
